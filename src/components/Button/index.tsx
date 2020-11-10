@@ -9,9 +9,7 @@ interface ButtonProps extends RectButtonProperties {
 
 const Button: React.FC<ButtonProps> = ({ children, ...rest }) => (
   <Container {...rest}>
-    <ButtonText>
-      {children}
-    </ButtonText>
+    <ButtonText>{children}</ButtonText>
   </Container>
 );
 
