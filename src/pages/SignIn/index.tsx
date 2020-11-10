@@ -9,6 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
+import { FormHandles } from '@unform/core';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -25,7 +26,7 @@ import {
 } from './styles';
 
 const SignIn: React.FC = () => {
-  const formRef = useRef(null);
+  const formRef = useRef<FormHandles>(null);
   const navigation = useNavigation();
 
   const handleSignIn = useCallback((data: object) => {
@@ -40,11 +41,12 @@ const SignIn: React.FC = () => {
         enabled
       >
         <ScrollView
-          contentContainerStyle={{ flex: 1 }}
           keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ flex: 1 }}
         >
           <Container>
             <Image source={logoImg} />
+
             <View>
               <Title>Log In</Title>
             </View>
@@ -53,14 +55,15 @@ const SignIn: React.FC = () => {
               <Input name="email" icon="mail" placeholder="Email" />
 
               <Input name="password" icon="lock" placeholder="Password" />
+
+              <Button
+                onPress={() => {
+                  formRef.current?.submitForm();
+                }}
+              >
+                Enter
+              </Button>
             </Form>
-            <Button
-              onPress={() => {
-                console.log('Working');
-              }}
-            >
-              Enter
-            </Button>
 
             <ForgotPassword onPress={() => { }}>
               <ForgotPasswordText>Forgot password</ForgotPasswordText>
